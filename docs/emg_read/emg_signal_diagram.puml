@@ -1,0 +1,41 @@
+@startuml EMG Siganl Read
+
+start
+:Apply Sensor on Skin;
+
+:Pre-amplify Signal;
+note right 
+    Uses TL084 as amplifier.
+    Passing from uV to mV scale.
+end note
+
+:Low Pass Filter;
+note right
+    Used to eliminate High Frequencies (Close to 1000Hz).
+    Can use Butterworth filter.
+end note
+
+:High Pass filter;
+note right 
+    Cutoff 20Hz. Can be implemented in software (4th order Butterworth)
+end note
+
+:Notch Filter;
+note right 
+    Remove power-line noise (60Hz in Brazil)
+end note
+
+:Rectify and Amplify;
+
+:Smoothening;
+
+:Baseline drift elimination;
+note right
+    Should be clear that with EMG data we can have baseline drifts.
+end note
+
+:Thresholding and Amplification;
+
+stop
+
+@enduml
