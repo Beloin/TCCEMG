@@ -3,6 +3,8 @@
 ## Sensor and Raw Data
 
 Sensor Name: Three‐lead Differential Muscle/Electromyography Sensor for Microcontroller Applications (Minified as "TLDEMG")
+Looks like this sensor gave me a problem, IT reads intensisty of "grip", or better, itensity of signal read... I need their frequencies... How can I do it? Can I use
+this sensor yet?
 
 
 ### Low Filter:
