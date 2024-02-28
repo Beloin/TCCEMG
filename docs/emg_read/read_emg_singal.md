@@ -3,9 +3,12 @@
 ## Sensor and Raw Data
 
 Sensor Name: Three‐lead Differential Muscle/Electromyography Sensor for Microcontroller Applications (Minified as "TLDEMG")
-Looks like this sensor gave me a problem, IT reads intensisty of "grip", or better, itensity of signal read... I need their frequencies... How can I do it? Can I use
-this sensor yet?
+Looks like this sensor gave me a problem, IT reads intensisty of "grip", or better, itensity of signal read... I need their frequencies... How can I do it?
+Can I use this sensor yet?
 
+TODO: Read https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3214794/
+TODO: Read https://backyardbrains.com/experiments/RobotHand
+TODO: Read https://www.mdpi.com/1424-8220/22/1/225
 
 ### Low Filter:
 
@@ -28,6 +31,9 @@ EMG Signals vary between 20Hz - 500Hz.
 [5]:https://www.youtube.com/watch?v=rB94NnU4pWM&ab_channel=PSAfterHours
 [6]:https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8749583/
 
-[Usage of sensor][1]
-[Digital Low-pass filter][4]
-[How low-pass filter works prattically][5]
+[Usage of sensor][1]  
+[Digital Low-pass filter][4]  
+[How low-pass filter works prattically][5]  
+
+
+README: This needs to be updated after acording to Notion file
