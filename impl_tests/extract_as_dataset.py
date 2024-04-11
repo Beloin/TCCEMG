@@ -38,6 +38,11 @@ Filtered:
     - second-order notch filter at 50 Hz for the elimination of noises like motion artifacts, high-frequency noise, and power line interference
 
 So probably we will need to use our own filter to use the notch filter with 60Hz and add Butterworth when acquiring our data.
+
+## Channels
+
+![Channels positions](./hand_channel_loc.png)
+
 °°°"""
 #|%%--%%| <IFoxyFk8cR|MaBALBz83P>
 
