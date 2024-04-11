@@ -30,6 +30,7 @@ r"""°°°
 # Data specs
 
 2kHz sample rate
+4 × 1,280,000 dimension
 
 | Raw and filtered
 
@@ -42,6 +43,10 @@ So probably we will need to use our own filter to use the notch filter with 60Hz
 ## Channels
 
 ![Channels positions](./hand_channel_loc.png)
+
+## Recording
+
+![Recording](./rec_timeline.png)
 
 °°°"""
 #|%%--%%| <IFoxyFk8cR|MaBALBz83P>
