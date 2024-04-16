@@ -5,27 +5,27 @@ r"""°°°
 
 This EDA is made to extract EMG signals by class from the current dataset.
 °°°"""
-#|%%--%%| <jCPW9iYtqp|9aYFr1Xldj>
+# |%%--%%| <jCPW9iYtqp|9aYFr1Xldj>
 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-#|%%--%%| <9aYFr1Xldj|oxpHeyNWqk>
+# |%%--%%| <9aYFr1Xldj|oxpHeyNWqk>
 
 base = pd.read_csv("./1_raw.csv", header=None)
 fbase = pd.read_csv("./1_filtered.csv", header=None)
 base.describe()
 
-#|%%--%%| <oxpHeyNWqk|r4Kq6UKHKy>
+# |%%--%%| <oxpHeyNWqk|r4Kq6UKHKy>
 
-plt.plot(base.iloc[:100,0])
+plt.plot(base.iloc[:100, 0])
 
-#|%%--%%| <r4Kq6UKHKy|B8Xs5xTtDQ>
+# |%%--%%| <r4Kq6UKHKy|B8Xs5xTtDQ>
 
-plt.plot(fbase.iloc[:1000,0])
+plt.plot(fbase.iloc[:1000, 0])
 
-#|%%--%%| <B8Xs5xTtDQ|IFoxyFk8cR>
+# |%%--%%| <B8Xs5xTtDQ|IFoxyFk8cR>
 r"""°°°
 # Data specs
 
@@ -49,12 +49,91 @@ So probably we will need to use our own filter to use the notch filter with 60Hz
 ![Recording](./rec_timeline.png)
 
 °°°"""
-#|%%--%%| <IFoxyFk8cR|MaBALBz83P>
+# |%%--%%| <IFoxyFk8cR|EJqJ2YhvmY>
+
+# frequency of 2k
+fbase.head()
+
+# |%%--%%| <EJqJ2YhvmY|MaBALBz83P>
 
 
-#|%%--%%| <MaBALBz83P|hcjq3VbSL1>
+class Cycle:
+    rest = []
+    extension = []
+    flexion = []
+    ulnar_deviation = []
+    radial_deviation = []
+    grip = []
+    finger_abduction = []
+    finger_adduction = []
+    supination = []
+    pronation = []
 
 
+class RecordExtractor(object):
 
-#|%%--%%| <hcjq3VbSL1|Z7LE0G4TrZ>
+    _freq = None
 
+    def __init__(self, freq=2000):
+        self._freq = freq
+
+    def read_sample(self, sample):
+        pass
+
+    # Cycle starts with 0
+    def read_cycle(self, n, sample):
+        print(len(sample))
+        offset = n*(104 * self._freq) + n*(30 * self._freq)
+        offsample = sample[offset:]
+
+        c = Cycle()
+
+        # 0°
+        # c.rest = offsample[self.sec(4):self.sec(6)]
+        c.rest = self.read_nthc(0, offsample)
+        c.extension = self.read_nthc(1, offsample)
+        c.flexion = self.read_nthc(2, offsample)
+        c.ulnar_deviation = self.read_nthc(3, offsample)
+        c.radial_deviation = self.read_nthc(4, offsample)
+        c.grip = self.read_nthc(5, offsample)
+        c.finger_abduction = self.read_nthc(6, offsample)
+        c.finger_adduction = self.read_nthc(7, offsample)
+        c.supination = self.read_nthc(8, offsample)
+        c.pronation = self.read_nthc(9, offsample)
+
+        return c
+
+    def read_nthc(self, n, sample):
+        offset = self.sec(4) + n*(self.sec(6) + self.sec(4))
+        print(offset)
+        return sample[offset:offset + self.sec(6)]
+
+    def sec(self, s):
+        return s * self._freq
+
+
+# |%%--%%| <MaBALBz83P|XG8p4wGTzH>
+
+extractor = RecordExtractor(2000)
+cycle = extractor.read_cycle(0, fbase.iloc[:,0])
+
+#|%%--%%| <XG8p4wGTzH|sapDeoqZSQ>
+
+cycle.extension.describe()
+
+#|%%--%%| <sapDeoqZSQ|lvu1ErSsH7>
+
+cycle.rest.describe()
+
+# |%%--%%| <lvu1ErSsH7|hcjq3VbSL1>
+
+plt.figure(figsize=(17, 8))
+plt.plot(cycle.rest)
+
+#|%%--%%| <hcjq3VbSL1|5IiDdptgUC>
+
+plt.figure(figsize=(17, 8))
+plt.plot(cycle.extension, color='b')
+plt.plot(cycle.rest, color = 'r')
+
+# |%%--%%| <5IiDdptgUC|Z7LE0G4TrZ>
