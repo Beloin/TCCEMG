@@ -54,7 +54,7 @@ So probably we will need to use our own filter to use the notch filter with 60Hz
 # frequency of 2k
 fbase.head()
 
-# |%%--%%| <EJqJ2YhvmY|MaBALBz83P>
+# |%%--%%| <EJqJ2YhvmY|mZFhPdcjVo>
 
 
 class Cycle:
@@ -77,8 +77,15 @@ class RecordExtractor(object):
     def __init__(self, freq=2000):
         self._freq = freq
 
-    def read_sample(self, sample):
-        pass
+    def read_sample(self, samples):
+        cycles = []
+        for i in range(4):
+            cycles.append([])
+            for j in range(5):
+                nc = self.read_cycle(j, samples.iloc[:, i])
+                cycles[i].append(nc)
+
+        return cycles
 
     # Cycle starts with 0
     def read_cycle(self, n, sample):
@@ -105,35 +112,45 @@ class RecordExtractor(object):
 
     def read_nthc(self, n, sample):
         offset = self.sec(4) + n*(self.sec(6) + self.sec(4))
-        print(offset)
         return sample[offset:offset + self.sec(6)]
 
     def sec(self, s):
         return s * self._freq
 
 
-# |%%--%%| <MaBALBz83P|XG8p4wGTzH>
+# |%%--%%| <mZFhPdcjVo|XG8p4wGTzH>
 
 extractor = RecordExtractor(2000)
-cycle = extractor.read_cycle(0, fbase.iloc[:,0])
+cycle = extractor.read_cycle(0, fbase.iloc[:, 0])
 
-#|%%--%%| <XG8p4wGTzH|sapDeoqZSQ>
+# |%%--%%| <XG8p4wGTzH|Ln8KvSqawr>
 
 cycle.extension.describe()
-
-#|%%--%%| <sapDeoqZSQ|lvu1ErSsH7>
-
 cycle.rest.describe()
 
-# |%%--%%| <lvu1ErSsH7|hcjq3VbSL1>
+# |%%--%%| <Ln8KvSqawr|hcjq3VbSL1>
 
 plt.figure(figsize=(17, 8))
 plt.plot(cycle.rest)
 
-#|%%--%%| <hcjq3VbSL1|5IiDdptgUC>
+# |%%--%%| <hcjq3VbSL1|5IiDdptgUC>
 
 plt.figure(figsize=(17, 8))
+plt.title("Sensor 0")
+plt.plot(cycle.rest, color='r')
 plt.plot(cycle.extension, color='b')
-plt.plot(cycle.rest, color = 'r')
+plt.plot(cycle.flexion, color='skyblue')
+plt.plot(cycle.ulnar_deviation, color='orange')
+plt.plot(cycle.radial_deviation, color='green')
+plt.plot(cycle.grip, color='purple')
+plt.plot(cycle.finger_abduction, color='slateblue')
+plt.plot(cycle.finger_adduction, color='brown')
+plt.plot(cycle.supination, color='pink')
+plt.plot(cycle.pronation, color='cyan')
 
-# |%%--%%| <5IiDdptgUC|Z7LE0G4TrZ>
+#|%%--%%| <5IiDdptgUC|GZavBgFPEz>
+
+extractor2 = RecordExtractor()
+cycles = extractor2.read_sample(fbase)
+
+# |%%--%%| <GZavBgFPEz|Z7LE0G4TrZ>
