@@ -148,9 +148,68 @@ plt.plot(cycle.finger_adduction, color='brown')
 plt.plot(cycle.supination, color='pink')
 plt.plot(cycle.pronation, color='cyan')
 
-#|%%--%%| <5IiDdptgUC|GZavBgFPEz>
+# |%%--%%| <5IiDdptgUC|GZavBgFPEz>
 
 extractor2 = RecordExtractor()
 cycles = extractor2.read_sample(fbase)
 
-# |%%--%%| <GZavBgFPEz|Z7LE0G4TrZ>
+#|%%--%%| <GZavBgFPEz|0kmx1QHzxG>
+
+cycles
+
+# |%%--%%| <0kmx1QHzxG|tonVzcHkfK>
+
+cycle = cycles[0][1]
+plt.figure(figsize=(17, 8))
+plt.title("Sensor 1")
+plt.plot(cycle.rest, color='r')
+plt.plot(cycle.extension, color='b')
+plt.plot(cycle.flexion, color='skyblue')
+plt.plot(cycle.ulnar_deviation, color='orange')
+plt.plot(cycle.radial_deviation, color='green')
+plt.plot(cycle.grip, color='purple')
+plt.plot(cycle.finger_abduction, color='slateblue')
+plt.plot(cycle.finger_adduction, color='brown')
+plt.plot(cycle.supination, color='pink')
+plt.plot(cycle.pronation, color='cyan')
+
+
+# |%%--%%| <tonVzcHkfK|WENf8zmxPM>
+
+
+for i in range(5):
+    cycle = cycles[0][i]
+    plt.figure(figsize=(17, 8))
+    plt.title("Sensor " + str(i))
+    plt.plot(cycle.rest, color='r')
+    plt.plot(cycle.extension, color='b')
+    plt.plot(cycle.flexion, color='skyblue')
+    plt.plot(cycle.ulnar_deviation, color='orange')
+    plt.plot(cycle.radial_deviation, color='green')
+    plt.plot(cycle.grip, color='purple')
+    plt.plot(cycle.finger_abduction, color='slateblue')
+    plt.plot(cycle.finger_adduction, color='brown')
+    plt.plot(cycle.supination, color='pink')
+    plt.plot(cycle.pronation, color='cyan')
+    plt.savefig("./export/raw_01_1cycle_" + str(i) + "sensor.png")
+
+
+# |%%--%%| <WENf8zmxPM|rGwGoGSjYg>
+
+fig, axs = plt.subplots(5, figsize=(17, 10))
+for i in range(5):
+    cycle = cycles[0][i]
+    # plt.figure(figsize=(17, 8))
+    axs[i].set_title("Sensor " + str(i))
+    axs[i].plot(cycle.rest, color='r')
+    axs[i].plot(cycle.extension, color='b')
+    axs[i].plot(cycle.flexion, color='skyblue')
+    axs[i].plot(cycle.ulnar_deviation, color='orange')
+    axs[i].plot(cycle.radial_deviation, color='green')
+    axs[i].plot(cycle.grip, color='purple')
+    axs[i].plot(cycle.finger_abduction, color='slateblue')
+    axs[i].plot(cycle.finger_adduction, color='brown')
+    axs[i].plot(cycle.supination, color='pink')
+    axs[i].plot(cycle.pronation, color='cyan')
+
+# |%%--%%| <rGwGoGSjYg|Z7LE0G4TrZ>
