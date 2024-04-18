@@ -211,5 +211,10 @@ for i in range(5):
     axs[i].plot(cycle.finger_adduction, color='brown')
     axs[i].plot(cycle.supination, color='pink')
     axs[i].plot(cycle.pronation, color='cyan')
+fig.show()
 
-# |%%--%%| <rGwGoGSjYg|Z7LE0G4TrZ>
+#|%%--%%| <rGwGoGSjYg|ITEjT5SarF>
+
+
+
+# |%%--%%| <ITEjT5SarF|Z7LE0G4TrZ>
