@@ -233,4 +233,42 @@ print(data)
 
 plt.bar(names, data)
 
-# |%%--%%| <sL8IwFU5yR|GEDwmG2wVf>
+#|%%--%%| <sL8IwFU5yR|zVhDhiQEia>
+r"""°°°
+MAV - Mean Absolute Value
+Measures the contraction level of muscles.
+ 
+Does't looks promising
+
+![MAV](./mav.png)
+°°°"""
+#|%%--%%| <zVhDhiQEia|X0SwFcaUiE>
+
+def mav(sample):
+    return sum(sample)/len(sample)
+
+#|%%--%%| <X0SwFcaUiE|b8UulLYmfd>
+
+mav(cycle_01.grip[:int(.2*extractor._freq)])
+
+#|%%--%%| <b8UulLYmfd|G9YrSgN2qE>
+
+data = []
+names = []
+for i in range(20):
+    window_s = .2 * (i+1)
+    window = window_s * extractor._freq
+    data.append(mav(np.array(cycle_01.grip[:int(window)])))
+    names.append("{0:0.2f}s".format(window_s))
+
+data.append(mav(np.array(cycle_01.grip[:int(window)])))
+names.append('{0:0.2f}s'.format(cycle_01.grip.__len__()/extractor._freq))
+print(data)
+
+plt.bar(names, data)
+
+#|%%--%%| <G9YrSgN2qE|Uu6tDABCVG>
+
+
+
+# |%%--%%| <Uu6tDABCVG|GEDwmG2wVf>
