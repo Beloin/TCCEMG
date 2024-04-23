@@ -7,3 +7,7 @@ https://www.sciencedirect.com/science/article/pii/S2352340922001330
     - New dataset creation
 2. Feature Extraction
 3. Classfier
+
+# Usage
+
+Remember to download all using GITLFS
