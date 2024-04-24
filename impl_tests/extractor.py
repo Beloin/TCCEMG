@@ -11,6 +11,13 @@ class Cycle:
     pronation = []
 
 
+    def __str__(self) -> str:
+        return f"Cycle Object with {len(self.rest)} lenght"
+    
+    def __repr__(self) -> str:
+        return str(self)
+
+
 class RecordExtractor(object):
 
     _freq = None
@@ -56,8 +63,11 @@ class RecordExtractor(object):
         return c
 
     def read_nthc(self, n, sample):
-        offset = self.sec(4) + n*(self.sec(6) + self.sec(4))
-        return sample[offset:offset + self.sec(6)]
+        offset = self.to_sec(4) + n*(self.to_sec(6) + self.to_sec(4))
+        return sample[offset:offset + self.to_sec(6)]
 
-    def sec(self, s):
+    def to_sec(self, s):
         return s * self._freq
+    
+    def to_ms(self, ms):
+        return (ms/1000) * self._freq
