@@ -19,7 +19,11 @@ class RecordExtractor(object):
         self._freq = freq
 
     def read_sample(self, samples):
-        """ samples should be a Dataframe with 4 columns"""
+        """ 
+        samples should be a Dataframe with 4 columns as 4 Sensors were available
+        Returns an array with 4 elements being another array with 5 elements, those 5 elements
+        are the cycles
+        """
         cycles = []
         for i in range(4):
             cycles.append([])
@@ -31,7 +35,6 @@ class RecordExtractor(object):
 
     # Cycle starts with 0
     def read_cycle(self, n, sample):
-        print(len(sample))
         offset = n*(104 * self._freq) + n*(30 * self._freq)
         offsample = sample[offset:]
 
