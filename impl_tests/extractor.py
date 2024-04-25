@@ -30,6 +30,8 @@ class RecordExtractor(object):
         samples should be a Dataframe with 4 columns as 4 Sensors were available
         Returns an array with 4 elements being another array with 5 elements, those 5 elements
         are the cycles
+
+        @return An array shaped as (4, 5), 4 Sensors and 5 cycles each
         """
         cycles = []
         for i in range(4):
