@@ -1,3 +1,6 @@
+from typing import Any
+
+
 class Cycle:
     rest = []
     extension = []
@@ -16,7 +19,12 @@ class Cycle:
     
     def __repr__(self) -> str:
         return str(self)
+    
+    def __getitem__(self, _name):
+        return getattr(self, _name)
 
+    def __setitem__(self, _name, _value):
+        setattr(self, _name, _value)
 
 class RecordExtractor(object):
 
