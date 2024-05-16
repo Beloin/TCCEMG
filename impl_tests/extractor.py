@@ -1,4 +1,5 @@
 from typing import Any
+import numpy as np
 
 
 class Cycle:
@@ -29,9 +30,11 @@ class Cycle:
 class RecordExtractor(object):
 
     _freq = None
+    _norm = False
 
-    def __init__(self, freq=2000):
+    def __init__(self, freq=2000, norm=False):
         self._freq = freq
+        self._norm = norm
 
     def read_sample(self, samples):
         """ 
@@ -74,7 +77,12 @@ class RecordExtractor(object):
 
     def read_nthc(self, n, sample):
         offset = self.to_sec(4) + n*(self.to_sec(6) + self.to_sec(4))
-        return sample[offset:offset + self.to_sec(6)]
+        r = sample[offset:offset + self.to_sec(6)]
+
+        if self._norm:
+            return np.array(r)
+
+        return r
 
     def to_sec(self, s):
         return s * self._freq

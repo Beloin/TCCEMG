@@ -3,6 +3,7 @@ import extractor as ext
 import numpy as np
 import pandas as pd
 import feature_extractors as fe
+import onset_extractor as osext
 
 a = 12
 
@@ -29,11 +30,16 @@ def cycle_through(cycles, extractor: ext.RecordExtractor) -> Tuple[dict, dict]:
 
     for j in range(4):
         for i in range(5):
-            lower_limit = int(extractor.to_ms(100))
-            upper_limit = int(extractor.to_ms(299)) # TODO: Create two databases, one with the offset and the other without
-
+            # lower_limit = int(extractor.to_ms(100))
             for c in classes:
+                upper_limit = int(extractor.to_ms(299))
+                lower_limit, _ = osext.extract_per_offset(cycles[j][i][c], .35,5,ret_data=False)
+
                 populatedict(cycles[j][i][c][:upper_limit], "SENSOR" + str(j), newds)
+
+                if c == 'rest':
+                    lower_limit = 0
+
                 populatedict(cycles[j][i][c][lower_limit:lower_limit+upper_limit], "SENSOR" + str(j), newds_offsetted)
 
     for c in classes:
