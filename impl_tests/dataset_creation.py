@@ -7,7 +7,7 @@ import onset_extractor as osext
 
 a = 12
 
-def create_dataset(fbase: pd.DataFrame, t1=.35, t2=5):
+def create_dataset(fbase: pd.DataFrame, t1=.35, t2=5, time_ms=299):
     """
     Parameters
     ----------
@@ -16,12 +16,12 @@ def create_dataset(fbase: pd.DataFrame, t1=.35, t2=5):
     """
     extractor = ext.RecordExtractor()
     cycles = extractor.read_sample(fbase)
-    normal, offsetted =  cycle_through(cycles, extractor,  t1, t2)
+    normal, offsetted =  cycle_through(cycles, extractor,  t1, t2, time_ms)
 
     return pd.DataFrame(normal), pd.DataFrame(offsetted)
 
-
-def cycle_through(cycles, extractor: ext.RecordExtractor,  t1=.35, t2=5) -> Tuple[dict, dict]:
+# TODO: Add more limit
+def cycle_through(cycles, extractor: ext.RecordExtractor,  t1=.35, t2=5, time_ms=299) -> Tuple[dict, dict]:
     classes = ["rest","extension", "flexion","ulnar_deviation","radial_deviation","grip","finger_abduction","finger_adduction","supination","pronation",]
     newds = {}
     newds_offsetted = {}
@@ -32,7 +32,7 @@ def cycle_through(cycles, extractor: ext.RecordExtractor,  t1=.35, t2=5) -> Tupl
         for i in range(5):
             # lower_limit = int(extractor.to_ms(100))
             for c in classes:
-                upper_limit = int(extractor.to_ms(299))
+                upper_limit = int(extractor.to_ms(time_ms))
 
                 populatedict(cycles[j][i][c][:upper_limit], "SENSOR" + str(j), newds)
 
